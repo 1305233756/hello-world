@@ -1,0 +1,163 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ball move</title>
+</head>
+<body>
+ <canvas id="canvas" width="1200" height="676" style="background-image: url(guide.jpg);"></canvas>
+ <script src="utils.js"></script>
+ <script src="ball.js"></script>
+ <script src="keycode.js"></script>
+</body>
+ <script>
+ window.onload = function () {
+ 	var canvas = document.getElementById('canvas'),
+ 		context = canvas.getContext('2d'),
+ 		targetx = x = 446,
+ 		targety = y = 416,
+ 		vx = 3,
+ 		vy = 3,
+ 		easing = 0.05,
+ 		place = 'hos'
+ 		mouse = captureMouse(canvas); 
+ 		
+
+ 	
+ 	meizi = new Image();
+ 	meizi.src = "meizi.png";
+
+ 	/*function onKeyboardEvent (event){
+				switch (event.keyCode) {
+					case keycode.UP:
+						y -= vy;
+						break;
+					case keycode.DOWN:
+						y += vy;
+						break;
+					case keycode.LEFT:
+						x -= vx;
+						break;
+					case keycode.RIGHT:
+						x += vx;
+						break;
+					
+					case keycode.SPACE:
+						bottom = ball.y;
+						isJump = true;
+						break;
+
+					default:
+						console.log(event.keyCode);
+				}
+				console.log('x:'+x+' y:'+y);
+			}
+
+	window.addEventListener ("keydown", onKeyboardEvent, false);
+
+	canvas.addEventListener('mousemove', function () {
+        console.log("x: " + mouse.x + ", y: " + mouse.y);
+      }, false);*/
+
+	canvas.addEventListener('mousedown', function () {
+      
+
+       //从医院出发
+       if (place=='hos') {
+       		//点饭店
+       		if (mouse.x>250&&mouse.x<320&&mouse.y>200&&mouse.y<300) {
+       		targetx = 250;
+       		targety = 300;
+       		place = 'rest';
+       	}
+       		//点电话厅
+       		if (mouse.x>480&&mouse.x<550&&mouse.y>230&&mouse.y<320) {
+       		targetx = 432;
+       		targety = 274;
+       		place = 'tel';
+       	}
+       		//点酒店
+       		if (mouse.x>600&&mouse.x<700&&mouse.y>430&&mouse.y<530) {
+       		targetx = 592;
+       		targety = 525;
+       		place = 'hot';
+       	}
+       		//点机场
+       		if (mouse.x>40&&mouse.x<140&&mouse.y>340&&mouse.y<440) {
+       		targetx = 250;
+       		targety = 300;
+       		place = 'rest';
+       	}
+       }
+
+       //从饭店出发
+        else if (place=='rest') {
+       		//点医院
+       		if (mouse.x>320&&mouse.x<420&&mouse.y>420&&mouse.y<520) {
+       		targetx = 446;
+       		targety = 416;
+       		place='hos';
+       	}
+       		//点机场
+       		if (mouse.x>40&&mouse.x<140&&mouse.y>340&&mouse.y<440) {
+       		targetx = 149;
+       		targety = 417;
+       		place = 'air';
+       	}
+       }
+
+       //从机场出发
+        else if (place=='air') {
+        	//点饭店
+       		if (mouse.x>250&&mouse.x<320&&mouse.y>200&&mouse.y<300) {
+       		targetx = 250;
+       		targety = 300;
+       		place = 'rest';
+       	}
+       }
+
+       //从电话厅出发
+       else if (place=='tel') {
+       		//点医院
+       		if (mouse.x>320&&mouse.x<420&&mouse.y>420&&mouse.y<520) {
+       		targetx = 446;
+       		targety = 416;
+       		place='hos';
+       	}
+       }
+
+      //从酒店出发
+      else if (place=='hot') {
+       		//点医院
+       		if (mouse.x>320&&mouse.x<420&&mouse.y>420&&mouse.y<520) {
+       		targetx = 446;
+       		targety = 416;
+       		place='hos';
+       	}
+       }
+      }, false);
+
+
+
+
+ 	
+ 
+
+ (function drawFrame () {
+ 		window.requestAnimationFrame(drawFrame, canvas);
+ 		context.clearRect(0, 0, canvas.width, canvas.height);
+
+
+ 		vx = (targetx - x) * easing;
+ 		vy = (targety - y) * easing;
+ 		x += vx;
+ 		y += vy;
+ 		context.drawImage(meizi, x-50, y-50, 100, 100);
+ 	
+ 		
+ 		
+ 		
+ 	}());
+}
+ </script>
+</html>
