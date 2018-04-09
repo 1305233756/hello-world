@@ -5,7 +5,7 @@
 	<title>Ball move</title>
 </head>
 <body>
- <canvas id="canvas" width="1200" height="676" style="background-image: url(guide.jpg);"></canvas>
+ <canvas id="canvas" width="1200" height="676" style="background-image: url(http://zdq1998.me/guide.jpg);"></canvas>
  <script src="utils.js"></script>
  <script src="ball.js"></script>
  <script src="keycode.js"></script>
@@ -27,7 +27,7 @@
  	meizi = new Image();
  	meizi.src = "meizi.png";
 
- 	/*function onKeyboardEvent (event){
+ 	function onKeyboardEvent (event){
 				switch (event.keyCode) {
 					case keycode.UP:
 						y -= vy;
@@ -57,7 +57,7 @@
 
 	canvas.addEventListener('mousemove', function () {
         console.log("x: " + mouse.x + ", y: " + mouse.y);
-      }, false);*/
+      }, false);
 
 	canvas.addEventListener('mousedown', function () {
       
@@ -146,17 +146,16 @@
  (function drawFrame () {
  		window.requestAnimationFrame(drawFrame, canvas);
  		context.clearRect(0, 0, canvas.width, canvas.height);
-
-
  		vx = (targetx - x) * easing;
- 		vy = (targety - y) * easing;
- 		x += vx;
- 		y += vy;
- 		context.drawImage(meizi, x-50, y-50, 100, 100);
- 	
+		vy = (targety - y) * easing;
+		if(x>0 && x<canvas.width) {
+			x += vx
+		} 
+ 		if(y>0 && y<canvas.height) {
+			y += vy;
+		}
  		
- 		
- 		
+ 		context.drawImage(meizi, x-50, y-50, 100, 100);	
  	}());
 }
  </script>

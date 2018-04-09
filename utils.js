@@ -1,4 +1,4 @@
-/*var captureMouse = function (element) {
+var captureMouse = function (element) {
 	var mouse = {x:0, y:0, event: null};
 
 	element.addEventListener('mousemove', function(event){
@@ -20,7 +20,7 @@
 	},false);
 
 	return mouse;
-};//鼠标位置*/
+};//鼠标位置
 captureMouse = function (element) {
   var mouse = {x: 0, y: 0, event: null},
       body_scrollLeft = document.body.scrollLeft,
